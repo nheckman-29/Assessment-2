@@ -1,5 +1,7 @@
-Following the Java grammar and syntax convention:
+Following the Java grammar and syntax convention. Below is the conversion of regex to token trees.
     
+ORIGINAL
+
 <switch>     -->
 <foreach>    -->
 <for>        --> for '(' <expression> ';' <expression> ';' <expression> ')' <statement>
@@ -10,3 +12,18 @@ Following the Java grammar and syntax convention:
 <return>     -->
 <program>    -->
 <block>      --> '{' {<statement>} '}'
+
+
+NEW
+
+<switch>     -->
+<foreach>    -->
+<for>        --> for '(' <expression> ';' <expression> ';' <expression> ')' <statement>
+<while>      --> while '(' <expression> ')' <statement>
+<do-while>   --> 
+<if>         --> if '(' <expression> ')' <statement> [ else <statement> ]
+<assignment> --> 
+<return>     --> return <IDENTIFIER> <SEMICOLON>
+<program>    --> VOID MAIN <LEFT PARENTHESIS> <RIGHT PARENTHESIS> <block>
+<block>      --> <LEFT CURLY> <LEFT CURLY> <STATEMENT> <SEMICOLON> <RIGHT CURLY> <RIGHT CURLY>
+
