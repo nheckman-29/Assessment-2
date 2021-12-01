@@ -1,0 +1,12 @@
+Following the Java grammar and syntax convention:
+    
+<switch>     -->
+<foreach>    -->
+<for>        --> for '(' <expression> ';' <expression> ';' <expression> ')' <statement>
+<while>      --> while '(' <expression> ')' <statement>
+<do-while>   --> 
+<if>         --> if '(' <expression> ')' <statement> [ else <statement> ]
+<assignment> -->
+<return>     -->
+<program>    -->
+<block>      --> '{' {<statement>} '}'
