@@ -1,29 +1,15 @@
 Following the Java grammar and syntax convention. Below is the conversion of regex to token trees.
-    
-ORIGINAL
 
-<switch>     -->
-<foreach>    -->
-<for>        --> for '(' <expression> ';' <expression> ';' <expression> ')' <statement>
-<while>      --> while '(' <expression> ')' <statement>
-<do-while>   --> 
-<if>         --> if '(' <expression> ')' <statement> [ else <statement> ]
-<assignment> -->
-<return>     -->
-<program>    -->
-<block>      --> '{' {<statement>} '}'
+<switch>     --> switch '(' <identifier> ')' <block>
+<foreach>    --> for '(' type <identifier> ':' <identifier> ')' <block>
+<for>        --> for '(' <expression> ';' <expression> ';' <expression> ')' <block>
+<while>      --> while '(' <expression> ')' <block>
+<do-while>   --> do <block> while '(' <expression> ')' ';'
+<if>         --> if '(' <expression> ')' <block> [ else <block> ]
+<assignment> --> <identifier> = <identifier>
+<return>     --> return <identifier> ';' | return ';'
+<program>    --> void main '(' ')' <block>
+<block>      --> '{' <statement>; '}'
 
-
-NEW
-
-<switch>     -->
-<foreach>    -->
-<for>        --> for '(' <expression> ';' <expression> ';' <expression> ')' <statement>
-<while>      --> while '(' <expression> ')' <statement>
-<do-while>   --> 
-<if>         --> if '(' <expression> ')' <statement> [ else <statement> ]
-<assignment> --> 
-<return>     --> return <IDENTIFIER> <SEMICOLON> | return
-<program>    --> VOID MAIN <LEFT PARENTHESIS> <RIGHT PARENTHESIS> <block>
-<block>      --> <LEFT CURLY> <LEFT CURLY> <STATEMENT> <SEMICOLON> <RIGHT CURLY> <RIGHT CURLY>
-
+<statement> can be <switch>, <foreach>, <for>, <while>, <do-while>, <if>, <assignment>, <return>, <block>
+<block> includes a statement loop which would provide for any size input block.
