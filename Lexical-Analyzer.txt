@@ -3,61 +3,6 @@
 #Import regex and string matching module
 import re             
 
-#Define main execution method
-def main():
-    global_declaration()                         #Declare the global variables
-    index = 0                                    #Track index throughout analysis
-    tokens = []                                  #Array to store the computed tokens. Add initial program token
-    nextToken = tokens[0]                        #Start analysis at beginning of token list
-    
-    #Java defined regex rules. Based on assessment requirements
-    rules = [  
-    ('//[^\n]*',                          'SINGLE LINE COMMENT'),
-    ('(\d*)\.\d+f?',                      'FLOAT LITERAL'),
-    ('"[^\n]*"',                          'STRING LITERAL'),
-    ('if{.*}',                            'IF STATEMENT'),
-    ('else{.*}',                          'ELSE STATEMENT'),
-    ('while{.*}',                         'WHILE LOOP'),
-    ('do{.*}',                            'DO STATEMENT'),
-    ('switch{.*}',                        'SWITCH STATEMENT'),
-    ('for{.*}',                           'FOR LOOP'),
-    ('\d+',                               'INTEGER LITERAL'),
-    ('[a-zA-Z_]\w*',                      'IDENTIFIER'),
-    ('\+\+',                              'INCREMENT'),
-    ('\-\-',                              'DECREMENT'),
-    ('\+',                                'PLUS'),
-    ('\-',                                'MINUS'),
-    ('\*',                                'MULTIPLY'),
-    ('\/',                                'DIVIDE'),
-    ('\(',                                'LEFT PARENTHESIS'),
-    ('\)',                                'RIGHT PARENTHESIS'),
-    ('\{',                                'LEFT CURLY'),
-    ('\}',                                'RIGHT CURLY'),
-    ('\[',                                'LEFT BRACKET'),
-    ('\]',                                'RIGHT BRACKET'),
-    ('<',                                 'LEFT WEDGE'),
-    ('>',                                 'LEFT WEDGE'),
-    (',',                                 'COMMA'),
-    (';',                                 'SEMICOLON'),
-    ('\.',                                'PERIOD'),
-    ('=',                                 'EQUALS'),
-    ('.',                                 'ERROR')  #if code gets here, the input is unknown. End analysis
-    ]
-    lexer = Lexer(rules, skip_whitespace=True)   #Create lexer object
-    
-    #run lexical analysis on input string. Below is a simple Java program to test
-    lexer.input('''
-    
-    ''')
-    try:
-        for token in lexer.tokens():                    #Add each token to list and print with object format
-            tokens.append(token.type)
-            print(token)
-    except LexerError as error:
-        print('Error at position %s' % error.pos)       #Error checking for invalid or unrecognized token
-    print(tokens)                                       #Print token list
-    statement()                                         #Run the analysis after everything is defined
-
 #Simple Token object. Token type, value, and position
 class Token(object):    
     def __init__(self, type, val, pos):
@@ -73,7 +18,8 @@ class Token(object):
 class LexerError(Exception):
     def __init__(self, pos):
         self.pos = pos
-        #Define lexical analysis object
+        
+#Define lexical analysis object
 class Lexer(object):
     #Rules is essentially a regex and type pair. Type describes the token defined by the regex
     #Whitespace is skipped so errors can be avoided. Whitespace is also not necessary in Java.
@@ -117,45 +63,25 @@ class Lexer(object):
             token = self.token()
             if token is None: break
             yield token
-def switch_statement():
-    x = 0
-def foreach_loop
-def if_statement():
-    if(nextToken != 'IF STATEMENT'):            #Check for if keyword
-        error()                                 #End analysis and error out if keyword not present
-    else:
-        index += 1                              #Increment token index
-        nextToken = tokens[index]               #Grab next token
-        nextToken, index, tokens = expression(nextToken, index, tokens)    #Run expression check with new information
-        if(nextToken != 'RIGHT PARENTHESIS'):   #Check for right parenthesis
-            error()                             #End analysis and error out if not present
-        else:
-            index += 1                          #Increment token index
-            nextToken = tokens[index]           #Grab next token
-            statement(nextToken, index, tokens) #Run statement check with new information
-            if(nextToken == 'ELSE STATEMENT'):  #No error if else isn't present
-                index += 1                      #Same as before
-                nextToken = tokens[index]
-                statement(nextToken, index, tokens) #Continue analysis
-def while_loop():
-    if(nextToken != 'WHILE LOOP'):
-        error()                                 #End analysis and error out
-    else:
-        index += 1                              #Increment index to check next token
-        nextToken = tokens[index]               #Process out next token and grab token after it
-        if(nextToken != 'LEFT PARENTHESIS'):
-            error()                             #End analysis and error out
-        else:
-            index += 1                                                          #Process out next token and grab token after it
-            nextToken = tokens[index]                                           #Update nextToken
-            nextToken, index, tokens = expression(nextToken, index, tokens)     #Run through expression and return needed values
-            if(nextToken != 'RIGHT PARENTHESIS'):  #No error if else isn't present
-                error()
-            else:
-                index += 1
-                nextToken = tokens[index]
-                statement(nextToken, index, tokens)                             #Return to statement when successful and continue analysis
-def for_loop():
+            
+def switch_():
+    global index
+    global nextToken
+    global rules
+    global lexer
+    global tokens
+def foreach():
+    global index
+    global nextToken
+    global rules
+    global lexer
+    global tokens
+def for_():
+    global index
+    global nextToken
+    global rules
+    global lexer
+    global tokens
     if(nextToken != 'FOR LOOP'):
         error()                                 #End analysis and error out
     else:
@@ -185,8 +111,88 @@ def for_loop():
                         index += 1
                         nextToken = tokens[index]
                         statement(nextToken, index, tokens)
-
-def expression():       #Question 2 code proof of concept
+def while_():
+    global index
+    global nextToken
+    global rules
+    global lexer
+    global tokens
+    if(nextToken != 'WHILE LOOP'):
+        error()                                 #End analysis and error out
+    else:
+        index += 1                              #Increment index to check next token
+        nextToken = tokens[index]               #Process out next token and grab token after it
+        if(nextToken != 'LEFT PARENTHESIS'):
+            error()                             #End analysis and error out
+        else:
+            index += 1                                                          #Process out next token and grab token after it
+            nextToken = tokens[index]                                           #Update nextToken
+            nextToken, index, tokens = expression(nextToken, index, tokens)     #Run through expression and return needed values
+            if(nextToken != 'RIGHT PARENTHESIS'):  #No error if else isn't present
+                error()
+            else:
+                index += 1
+                nextToken = tokens[index]
+                statement(nextToken, index, tokens)                             #Return to statement when successful and continue analysis
+def do_while():
+    global index
+    global nextToken
+    global rules
+    global lexer
+    global tokens
+def if_():
+    global index
+    global nextToken
+    global rules
+    global lexer
+    global tokens
+    if(nextToken != 'IF STATEMENT'):            #Check for if keyword
+        error()                                 #End analysis and error out if keyword not present
+    else:
+        index += 1                              #Increment token index
+        nextToken = tokens[index]               #Grab next token
+        nextToken, index, tokens = expression(nextToken, index, tokens)    #Run expression check with new information
+        if(nextToken != 'RIGHT PARENTHESIS'):   #Check for right parenthesis
+            error()                             #End analysis and error out if not present
+        else:
+            index += 1                          #Increment token index
+            nextToken = tokens[index]           #Grab next token
+            statement(nextToken, index, tokens) #Run statement check with new information
+            if(nextToken == 'ELSE STATEMENT'):  #No error if else isn't present
+                index += 1                      #Same as before
+                nextToken = tokens[index]
+                statement(nextToken, index, tokens) #Continue analysis
+def assignment():
+    global index
+    global nextToken
+    global rules
+    global lexer
+    global tokens
+def return_():
+    global index
+    global nextToken
+    global rules
+    global lexer
+    global tokens
+def program():
+    global index
+    global nextToken
+    global rules
+    global lexer
+    global tokens
+    print(nextToken.val)
+def block():
+    global index
+    global nextToken
+    global rules
+    global lexer
+    global tokens
+def expression():
+    global index
+    global nextToken
+    global rules
+    global lexer
+    global tokens
     if(nextToken != 'IDENTIFIER'):              #Beginning of expression should be some sort of identifier
         error()
     else:
@@ -206,24 +212,81 @@ def expression():       #Question 2 code proof of concept
                 nextToken = tokens[index]
     return nextToken, index, tokens         #Return values to be able to continue program
 def statement():                        #Covers requirements for assignment
+    global index
+    global nextToken
+    global rules
+    global lexer
+    global tokens
     if(nextToken == 'IF STATEMENT'):
-        selection_statement(nextToken, index, tokens)
+        if_statement(nextToken, index, tokens)
     elif(nextToken == 'WHILE LOOP'):
         while_loop(nextToken, index, tokens)
     elif(nextToken == 'FOR LOOP'):
         for_loop(nextToken, index, tokens)
     else:
-        index += 1
-        nextToken = tokens[index]
-        statement(nextToken, index, tokens)
-        
+        if(index+1 < len(tokens)):
+            index += 1
+            nextToken = tokens[index]
+            statement(nextToken, index, tokens)
+
 def error(wrong):                           #Programmatically show where the syntax analysis fails
     print('Failure: ' + wrong)              #Print failure statement plus additional information
-def global_declaration():
-    global index
-    global nextToken
-    global rules
-    global lexer
 
 if __name__=="__main__":                    #Begin the main method
-     main()
+    index = 0                               #Track index throughout analysis
+    tokens = []                             #Array to store the computed tokens
+    
+    #Java defined regex rules. Based on assessment requirements
+    rules = [  
+    ('//[^\n]*',                          'SINGLE LINE COMMENT'),
+    ('(\d*)\.\d+f?',                      'FLOAT LITERAL'),
+    ('"[^\n]*"',                          'STRING LITERAL'),
+    ('if',                                'IF'),
+    ('else',                              'ELSE'),
+    ('while',                             'WHILE'),
+    ('do',                                'DO'),
+    ('switch',                            'SWITCH'),
+    ('for',                               'FOR'),
+    ('\d+',                               'INTEGER LITERAL'),
+    ('[a-zA-Z_]\w*',                      'IDENTIFIER'),
+    ('\+\+',                              'INCREMENT'),
+    ('\-\-',                              'DECREMENT'),
+    ('\+',                                'PLUS'),
+    ('\-',                                'MINUS'),
+    ('\*',                                'MULTIPLY'),
+    ('\/',                                'DIVIDE'),
+    ('\(',                                'LEFT PAREN'),
+    ('\)',                                'RIGHT PAREN'),
+    ('\{',                                'LEFT CURLY'),
+    ('\}',                                'RIGHT CURLY'),
+    ('\[',                                'LEFT BRACKET'),
+    ('\]',                                'RIGHT BRACKET'),
+    ('\<',                                'LEFT WEDGE'),
+    ('\>',                                'RIGHT WEDGE'),
+    ('\,',                                'COMMA'),
+    ('\;',                                'SEMICOLON'),
+    ('\.',                                'PERIOD'),
+    ('\=',                                'EQUALS'),
+    ('.',                                 'UNKNOWN')  #if code gets here, the input is unknown. End analysis
+    ]
+    
+    lexer = Lexer(rules, skip_whitespace=True)   #Create lexer object
+    
+    #Sample Java Program
+    lexer.input('''
+    void main(){
+        
+    }
+    ''')
+    try:
+        for token in lexer.tokens():                    #Add each token to list and print with object format
+            tokens.append(token)
+                                                        #Tokens is now populated with token objects
+    except LexerError as error:
+        print('Error at position %s' % error.pos)       #Error checking for invalid or unrecognized token
+    nextToken = tokens[0]                               #Start analysis at beginning of token list
+    
+#    for token in tokens:                               #Uncomment to view tokens
+#        print(token)
+
+    program()                                           #Begin program analysis
