@@ -4,7 +4,6 @@ Nathan Heckman
 
 ---Practical Portion---
 
-Lexical-Analyzer.py
 Lexical-Analyzer.txt
 Rules.txt
 Lexer Syntax.txt
