@@ -1,15 +1,15 @@
 Java defined regex rules. Based on assessment requirements.
 
-rules = [
+rules = [  
     ('//[^\n]*',                          'SINGLE LINE COMMENT'),
     ('(\d*)\.\d+f?',                      'FLOAT LITERAL'),
     ('"[^\n]*"',                          'STRING LITERAL'),
-    ('if{.*}',                            'IF STATEMENT'),
-    ('else{.*}',                          'ELSE STATEMENT'),
-    ('while{.*}',                         'WHILE LOOP'),
-    ('do{.*}',                            'DO STATEMENT'),
-    ('switch{.*}',                        'SWITCH STATEMENT'),
-    ('for{.*}',                           'FOR LOOP'),
+    ('if',                                'IF'),
+    ('else',                              'ELSE'),
+    ('while',                             'WHILE'),
+    ('do',                                'DO'),
+    ('switch',                            'SWITCH'),
+    ('for',                               'FOR'),
     ('\d+',                               'INTEGER LITERAL'),
     ('[a-zA-Z_]\w*',                      'IDENTIFIER'),
     ('\+\+',                              'INCREMENT'),
@@ -18,16 +18,17 @@ rules = [
     ('\-',                                'MINUS'),
     ('\*',                                'MULTIPLY'),
     ('\/',                                'DIVIDE'),
-    ('\(',                                'LEFT PARENTHESIS'),
-    ('\)',                                'RIGHT PARENTHESIS'),
+    ('\(',                                'LEFT PAREN'),
+    ('\)',                                'RIGHT PAREN'),
     ('\{',                                'LEFT CURLY'),
     ('\}',                                'RIGHT CURLY'),
     ('\[',                                'LEFT BRACKET'),
     ('\]',                                'RIGHT BRACKET'),
-    ('<',                                 'LEFT WEDGE'),
-    ('>',                                 'LEFT WEDGE'),
-    (',',                                 'COMMA'),
-    (';',                                 'SEMICOLON'),
+    ('\<',                                'LEFT WEDGE'),
+    ('\>',                                'RIGHT WEDGE'),
+    ('\,',                                'COMMA'),
+    ('\;',                                'SEMICOLON'),
     ('\.',                                'PERIOD'),
-    ('=',                                 'EQUALS'),
-    ('.',                                 'ERROR')
+    ('\=',                                'EQUALS'),
+    ('.',                                 'UNKNOWN')
+    ]
