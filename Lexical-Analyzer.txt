@@ -180,13 +180,34 @@ def program():
     global rules
     global lexer
     global tokens
-    print(nextToken.val)
+    if(nextToken.val != 'void'):
+        error(tokens[index])                #Send token object to error message
+    else:
+        index += 1
+        nextToken = tokens[index]
+        if(nextToken.val != 'main'):
+            error(tokens[index])
+        else:
+            index += 1
+            nextToken = tokens[index]
+            if(nextToken.val != '('):
+                error(tokens[index])
+            else:
+                index += 1
+                nextToken = tokens[index]
+                if(nextToken.val != ')'):
+                    error(tokens[index])
+                else:
+                    block()
+                    
+    print('Success')                        #If program makes it back here, syntax analysis was successful
 def block():
     global index
     global nextToken
     global rules
     global lexer
     global tokens
+    print('Keep going from here')
 def expression():
     global index
     global nextToken
@@ -229,8 +250,9 @@ def statement():                        #Covers requirements for assignment
             nextToken = tokens[index]
             statement(nextToken, index, tokens)
 
-def error(wrong):                           #Programmatically show where the syntax analysis fails
-    print('Failure: ' + wrong)              #Print failure statement plus additional information
+def error(wrong):                                                                            #Programmatically show where the syntax analysis fails
+    print('Invalid syntax (' + str(wrong.val) + ') at position ' + str(wrong.pos))           #Print failure statement with position and token
+    exit()
 
 if __name__=="__main__":                    #Begin the main method
     index = 0                               #Track index throughout analysis
@@ -284,9 +306,10 @@ if __name__=="__main__":                    #Begin the main method
                                                         #Tokens is now populated with token objects
     except LexerError as error:
         print('Error at position %s' % error.pos)       #Error checking for invalid or unrecognized token
-    nextToken = tokens[0]                               #Start analysis at beginning of token list
+    nextToken = tokens[index]                           #Start analysis at beginning of token list
     
-#    for token in tokens:                               #Uncomment to view tokens
-#        print(token)
-
+    for token in tokens:                                #Uncomment to view tokens
+        print(token)
+        
+    print()
     program()                                           #Begin program analysis
