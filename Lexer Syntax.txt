@@ -6,10 +6,15 @@ Following the Java grammar and syntax convention. Below is the conversion of reg
 <while>      --> while '(' <expression> ')' <block>
 <do-while>   --> do <block> while '(' <expression> ')' ';'
 <if>         --> if '(' <expression> ')' <block> [ else <block> ]
+
 <assignment> --> <identifier> = <identifier>
+<expression> --> X Y X (see symbol table below)
 <return>     --> return <identifier> ';' | return ';'
 <program>    --> void main '(' ')' <block>
 <block>      --> '{' <statement>; '}'
+
+X = Integer Literal | Float Literal | String Literal | Identifier
+Y = Plus | Minus | Multiply | Divide | Equals | Not Equals
 
 <statement> can be <switch>, <foreach>, <for>, <while>, <do-while>, <if>, <assignment>, <return>, <block>
 <block> includes a statement loop which would provide for any size input block.
