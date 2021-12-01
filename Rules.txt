@@ -1,4 +1,5 @@
-#Java defined regex rules. Based on assessment requirements
+Java defined regex rules. Based on assessment requirements.
+
 rules = [
     ('//[^\n]*',                          'SINGLE LINE COMMENT'),
     ('(\d*)\.\d+f?',                      'FLOAT LITERAL'),
@@ -29,4 +30,4 @@ rules = [
     (';',                                 'SEMICOLON'),
     ('\.',                                'PERIOD'),
     ('=',                                 'EQUALS'),
-    ('.',                                 'ERROR')  #if code gets here, the input is unknown. End analysis
+    ('.',                                 'ERROR')
