@@ -23,7 +23,7 @@ NEW
 <do-while>   --> 
 <if>         --> if '(' <expression> ')' <statement> [ else <statement> ]
 <assignment> --> 
-<return>     --> return <IDENTIFIER> <SEMICOLON>
+<return>     --> return <IDENTIFIER> <SEMICOLON> | return
 <program>    --> VOID MAIN <LEFT PARENTHESIS> <RIGHT PARENTHESIS> <block>
 <block>      --> <LEFT CURLY> <LEFT CURLY> <STATEMENT> <SEMICOLON> <RIGHT CURLY> <RIGHT CURLY>
 
