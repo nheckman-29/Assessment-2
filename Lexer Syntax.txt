@@ -14,7 +14,7 @@ Following the Java grammar and syntax convention. Below is the conversion of reg
 <block>      --> '{' <statement>; '}'
 
 X = Integer Literal | Float Literal | String Literal | Identifier
-Y = Plus | Minus | Multiply | Divide | Equals | Not Equals
+Y = Plus | Minus | Multiply | Divide | Equals | Not Equals | Less Than | Greater Than
 
 <statement> can be <switch>, <foreach>, <for>, <while>, <do-while>, <if>, <assignment>, <return>, <block>
 <block> includes a statement loop which would provide for any size input block.
