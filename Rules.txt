@@ -29,6 +29,7 @@ rules = [
     ('\,',                                'COMMA'),
     ('\;',                                'SEMICOLON'),
     ('\.',                                'PERIOD'),
+    ('\!\=',                              'NOT EQUALS'),
     ('\=',                                'EQUALS'),
     ('.',                                 'UNKNOWN')
     ]
