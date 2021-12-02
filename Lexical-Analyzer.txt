@@ -89,7 +89,11 @@ def switch_():
                 error(tokens[index])
             else:
                 increment_token()
-                block() #DONE
+                if(nextToken.val != ')'):
+                    error(tokens[index])
+                else:
+                    increment_token()
+                    block()
 def foreach():
     global index
     global nextToken
@@ -146,7 +150,7 @@ def for_():
                             error(tokens[index])
                         else:
                             increment_token()
-                            block() #DONE
+                            block()
 def while_():
     global index
     global nextToken
@@ -195,13 +199,13 @@ def do_while():
                         error(tokens[index])
                     else:
                         increment_token() #DONE
-def if_():#DONE
+def if_():
     global index
     global nextToken
     global rules
     global lexer
     global tokens
-    if(nextToken.val != 'if'):                  #Check for if keyword
+    if(nextToken.val != 'if'):
         error(tokens[index])
     else:
         increment_token()
@@ -226,7 +230,11 @@ def assignment():
     if(nextToken.type != 'IDENTIFIER'):                  #Check for if keyword
         error(tokens[index])
     else:
-        increment_token() #DONE
+        if(nextToken.val != ';'):
+            error(tokens[index])
+        else:
+            increment_token()
+    print('Assignment Good')
 def return_():
     global index
     global nextToken
@@ -244,6 +252,7 @@ def return_():
             increment_token()
         else:
             error(tokens[index])
+    print('Return Good')
 def program():
     global index
     global nextToken
@@ -267,7 +276,7 @@ def program():
                 else:
                     increment_token()
                     block()
-    print('Success')                        #If program makes it back here, syntax analysis was successful #DONE #DONE
+    print('\nProgram Good')                        #If program makes it back here, syntax analysis was successful #DONE #DONE
 def block():
     global index
     global nextToken
@@ -283,27 +292,30 @@ def block():
             error(tokens[index])
         else:
             if(nextGood()):
-                increment_token() #DONE #DONE
+                increment_token()
 def expression():
     global index
     global nextToken
     global rules
     global lexer
     global tokens
-    switch(nextToken.type):
-        case 'INTEGER LITERAL':
-            break
-        case 'FLOAT LITERAL':
-            break
-        case 'STRING LITERAL':
-            break
-        case 'IDENTIFIER':
-            assignment()
-            break
-        case default:
+    if(nextToken.type == 'INTEGER LITERAL' or nextToken.type == 'FLOAT LITERAL' or nextToken.type == 'STRING LITERAL'):
+        increment_token()
+        if(nextToken.val == '+' or nextToken.val == '-' or nextToken.val == '*' or nextToken.val == '/' or nextToken.val == '<' or nextToken.val == '>'):
+            increment_token()
+            if(nextToken.type == 'INTEGER LITERAL' or nextToken.type == 'FLOAT LITERAL' or nextToken.type == 'STRING LITERAL'):
+                increment_token()
+    elif(nextToken.type == 'IDENTIFIER'):
+        increment_token()
+        if(nextToken.val != '='):
             error(tokens[index])
-            break
-def statement():                        #Covers requirements for assignment
+        else:
+            increment_token()
+            assignment()
+    else:
+        error(tokens[index])
+    print('Expression Good')
+def statement():
     global index
     global nextToken
     global rules
@@ -311,25 +323,28 @@ def statement():                        #Covers requirements for assignment
     global tokens
     if(nextToken.val == 'if'):
         if_()
+        print('If Good')
     elif(nextToken.val == 'while'):
         while_()
+        print('While Good')
     elif(nextToken.val == 'do'):
         do_()
+        print('Do-While Good')
     elif(nextToken.val == 'for'):
         for_()
+        print('For Good')
     elif(nextToken.val == 'switch'):
         switch_()
+        print('Switch Good')
     elif(nextToken.val == 'return'):
         return_()
+        print('Return Good')
     elif(nextToken.val == '{'):
         block()
-    else:
-        if(nextGood()): #fix this, need to check if the end of token array or not
-            increment_token()
-            statement() #NOT DONE
+        print('Block Good')
 def error(wrong):                                                                            #Programmatically show where the syntax analysis fails
     print('Invalid syntax (' + str(wrong.val) + ') at position ' + str(wrong.pos))           #Print failure statement with position and token
-    exit() #DONE
+    exit()
 def nextGood(): #fix this, need to check 
     global index
     global tokens
@@ -370,6 +385,7 @@ if __name__=="__main__":                    #Begin the main method
     ('\>',                                'RIGHT WEDGE'),
     ('\,',                                'COMMA'),
     ('\;',                                'SEMICOLON'),
+    ('\:',                                'COLON'),
     ('\.',                                'PERIOD'),
     ('\!\=',                              'NOT EQUALS'),
     ('\=',                                'EQUALS'),
@@ -381,6 +397,10 @@ if __name__=="__main__":                    #Begin the main method
     #Sample Java Program
     lexer.input('''
     void main(){
+        switch(example){
+            
+        }
+        for
     }
     ''')
     try:
